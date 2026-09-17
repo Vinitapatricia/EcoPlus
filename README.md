@@ -1,8 +1,8 @@
 # EcoPulse
 
-Aplikasi web (Streamlit) untuk mengelompokkan 176 negara berdasarkan indikator
+Aplikasi web yang berbasis Streamlit untuk mengelompokkan 176 negara berdasarkan indikator
 keberlanjutan energi, menggunakan model **K-Means** yang dilatih di
-`DBSCAN_revisi_ML_final.ipynb`. Proyek ML — BINUS Semester 4.
+`training_model.ipynb`. Proyek ML — BINUS Semester 4.
 
 ## Ringkasan
 
@@ -23,18 +23,19 @@ tradisional** — bukan transisi energi bersih yang sesungguhnya.
 
 ```
 ECOPLUS/
-├── app.py                          # Aplikasi Streamlit (3 halaman, lihat di bawah)
+├── app.py                           # Aplikasi Streamlit (3 halaman, lihat di bawah)
+├── training_model.ipynb             # Training Model
 ├── requirements.txt
 ├── model/
-│   ├── kmeans_model.pkl            # Model K-Means terlatih (k=2)
-│   ├── clip_bounds.pkl             # Batas IQR clipping per fitur (dict: kolom -> (lower, upper))
-│   ├── log_transformed_features.pkl# Daftar fitur yang di-log1p (skewness tinggi)
-│   ├── features.pkl                # Urutan 5 nama kolom fitur final
-│   ├── cluster_profiles.pkl        # DataFrame per negara: Entity, cluster_kmeans, nilai fitur (clipped)
-│   ├── cluster_names.pkl           # Nama deskriptif tiap cluster {0: "...", 1: "..."}
-│   ├── X_log.pkl                   # Data ter-clip+log (dipakai utk fit ulang RobustScaler saat app start)
-│   ├── noise_countries.pkl         # Negara yang dianggap anomali oleh DBSCAN
-│   └── preprocessing_pipeline.pkl  # (lihat catatan di bawah — saat ini tidak dipakai app.py)
+│   ├── kmeans_model.pkl             # Model K-Means terlatih (k=2)
+│   ├── clip_bounds.pkl              # Batas IQR clipping per fitur (dict: kolom -> (lower, upper))
+│   ├── log_transformed_features.pkl # Daftar fitur yang di-log1p (skewness tinggi)
+│   ├── features.pkl                 # Urutan 5 nama kolom fitur final
+│   ├── cluster_profiles.pkl         # DataFrame per negara: Entity, cluster_kmeans, nilai fitur (clipped)
+│   ├── cluster_names.pkl            # Nama deskriptif tiap cluster {0: "...", 1: "..."}
+│   ├── X_log.pkl                    # Data ter-clip+log (dipakai utk fit ulang RobustScaler saat app start)
+│   ├── noise_countries.pkl          # Negara yang dianggap anomali oleh DBSCAN
+│   └── preprocessing_pipeline.pkl   # (lihat catatan di bawah)
 ```
 
 App **tidak** memuat `preprocessing_pipeline.pkl` langsung. `app.py` membangun
